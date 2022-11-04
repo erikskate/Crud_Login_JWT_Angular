@@ -13,7 +13,6 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 export class ListaProductoComponent implements OnInit {
 
   productos: Producto[] = [];
-  roles: string[];
   isAdmin = false;
 
   constructor(
@@ -24,12 +23,7 @@ export class ListaProductoComponent implements OnInit {
 
   ngOnInit() {
     this.cargarProductos();
-    this.roles = this.tokenService.getAuthorities();
-    this.roles.forEach(rol => {
-      if(rol === 'ROLE_ADMIN'){
-        this.isAdmin = true;
-      }
-    })
+    this.isAdmin = this.tokenService.getIsAmin();
   }
 
   cargarProductos(): void {
